@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #17253a;
+
+  /* National Neurodivergent Veterinary Alliance (NNVA) color palette
+     Pulled from ndvetalliance.org — navy accent, blush rose, warm cream, soft lavender. */
+  --color-primary: #2c4971;        /* deep navy (headings, nav, dark surfaces) — NNVA accent 1 */
+  --color-primary-50: #f6f8fb;     /* palest navy-tinted background */
+  --color-primary-100: #dbe3ee;    /* soft navy tint (icon chips, hairline borders) */
+  --color-primary-200: #aabfd5;    /* muted blue-grey */
+  --color-primary-800: #17253a;    /* deep ink navy — NNVA accent 6 */
+  --color-accent: #2c4971;         /* navy (primary CTA buttons) */
+  --color-accent-100: #dbe3ee;     /* pale navy tint */
+  --color-accent-600: #17253a;     /* deeper ink navy (hover) */
+  --color-highlight: #e1b6aa;      /* blush rose (emphasis accents) — NNVA accent 2 */
+
+  /* Blush + lavender support tones from the NNVA brand */
+  --color-blush: #e8bbb2;          /* blush rose from the logo */
+  --color-blush-50: #f8ede5;       /* pale blush/peach wash */
+  --color-lavender: #d3c3d3;       /* soft mauve/lavender — NNVA accent 4 */
+  --color-lavender-50: #ebecf6;    /* pale lavender wash from the logo */
+  --color-slate: #67718d;          /* slate blue-grey — NNVA accent 8 */
+
+  /* Warm cream background from NNVA (accent 3) */
+  --color-warm-bg: #fbf3e8;
+
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-success-600: #16a34a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--color-primary);
+  --color-primary-50: var(--color-primary-50);
+  --color-primary-100: var(--color-primary-100);
+  --color-primary-200: var(--color-primary-200);
+  --color-primary-800: var(--color-primary-800);
+  --color-accent: var(--color-accent);
+  --color-accent-100: var(--color-accent-100);
+  --color-accent-600: var(--color-accent-600);
+  --color-highlight: var(--color-highlight);
+  --color-blush: var(--color-blush);
+  --color-blush-50: var(--color-blush-50);
+  --color-lavender: var(--color-lavender);
+  --color-lavender-50: var(--color-lavender-50);
+  --color-slate: var(--color-slate);
+  --color-warm-bg: var(--color-warm-bg);
+  --color-success: var(--color-success);
+  --color-success-600: var(--color-success-600);
+
+  --font-sans: "Work Sans", system-ui, sans-serif;
+  --font-script: "Poppins", system-ui, sans-serif;
+
+  --container-main: 1280px;
+  --section-padding-y: 5rem;
+  --section-padding-x: 1.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* This is a fixed light design — opt out of forced dark-mode inversion */
+    color-scheme: light;
+  }
+
+  /* Guard against any element bleeding past the viewport on small screens */
+  html,
+  body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+  }
+
+  .font-script {
+    font-family: var(--font-script);
+  }
+}
+
+@layer utilities {
+  .container-main {
+    max-width: var(--container-main);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--section-padding-x);
+    padding-right: var(--section-padding-x);
+  }
+
+  .section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: var(--section-padding-y);
+      padding-bottom: var(--section-padding-y);
+    }
+  }
+
+  .trust-badge {
+    height: 2rem;
+    width: auto;
+    opacity: 0.6;
+  }
+
+  .trust-badge:hover {
+    opacity: 1;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.7s ease-out forwards;
+  }
+
+  .animate-float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+
+  .animate-float-slower {
+    animation: floatSlower 8s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes floatSlower {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float-slow,
+  .animate-float-slower {
+    animation: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
